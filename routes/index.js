@@ -6,5 +6,11 @@ const verifyToken = require('../middleware/auth');
 
 route.use("/todos",verifyToken, todoRoutes)
 route.use("/auth", authRoutes)
+
+route.get('/',(req,res)=>{
+    res.json(
+        {message: 'Gidion Bagas Prananta'}
+    )
+})
  
 module.exports = route
