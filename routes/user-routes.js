@@ -6,8 +6,8 @@ const route = express.Router()
 
 route.get('/', getAllUser)
 route.get('/:id', getUserById)
-route.post('/', addUser)
-route.delete('/:id', deleteById)
-route.delete('/', deleteAllUser)
+// route.post('/', addUser)
+// route.delete('/:id', deleteById)
+// route.delete('/', deleteAllUser)
 
 module.exports = route
