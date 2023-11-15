@@ -1,8 +1,6 @@
 
 const Todos = require('../models/Todos')
 
-
-
 module.exports = {
     getAll: async(req,res)=>{
         const todos = await Todos.findAll();
@@ -111,6 +109,34 @@ module.exports = {
         } catch (error) {
             console.error('Error saat menghapus semua data todo:', error);
             res.status(500).json({ message: 'Gagal menghapus semua data todo.' });
+        }
+    },
+    editDatabyId: async (req, res) => {
+        const TodoId = req.params.id;
+        const newData = req.body;
+
+        try {
+            const existingTodo = await Todos.findByPk(TodoId);
+
+            if (!existingTodo) {
+                return res.status(404).json({ 
+                    message: 'Todo tidak ditemukan.' 
+                });
+            }
+
+            // Update data dengan ID yang diminta
+            await existingTodo.update(newData);
+
+            // Ambil data yang telah diupdate
+            const updatedTodo = await Todos.findByPk(TodoId);
+
+            res.status(200).json({
+                message: 'Berhasil mengupdate data todo',
+                data: updatedTodo,
+            });
+        } catch (error) {
+            console.error('Error saat mengupdate data todo:', error);
+            res.status(500).json({ message: 'Gagal mengupdate data todo.' });
         }
     },
 }
