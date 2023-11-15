@@ -1,48 +1,118 @@
-let dataTodo = require('../models/todo-model')
+
+const Todos = require('../models/Todos')
+
 
 
 module.exports = {
-    getAll: (req,res)=>{
-        res.json({
-            data: dataTodo
-        })
+    getAll: async(req,res)=>{
+        const todos = await Todos.findAll();
+
+        try{
+            res.status(200).json({
+                todos
+            })
+        } catch{
+            res.status(404).json({
+                message: "tidak dapat mendapatkan data"
+            })
+        }
     },
-    getTodoById: (req,res)=>{
+    getTodoById: async(req,res)=>{
 
-        const id = req.params.id 
+        let itemId = req.params.id
 
-        const todo = dataTodo.find((item)=> item.id == id)
+        try{
+            const todo = await Todos.findByPk(itemId, {
+                attributes: ['id', 'value'],
+            });
 
-        res.json({
-             data: todo
-        })
-    },
-    addTodo: (req,res)=>{
-        const newData = req.body
+            res.json({
+                todo
+            })
 
-        const newTodo = {
-            id: dataTodo.length +1,
-            value: newData.value
+        }catch(error){
+            res.json({
+                message: 'Gagal mendapatkan data',
+                error
+            })
         }
 
-        dataTodo.push(newTodo)
-
-        res.json({
-            message: 'data berhasil ditambah'
-        })
+        
     },
-    deleteById: (req,res)=>{
-        let id = req.params.id
-        const todoId = parseInt(id);
+    getTodoDetailById: async(req,res)=>{
 
-        const filteredData = dataTodo.filter(item => item.id !== todoId)
+        let itemId = req.params.id
 
-        res.json({
-            message: 'data berhasil dihapus',
-        })
+        try{
+            const todo = await Todos.findByPk(itemId, {
+                attributes: ['id', 'value','createdAt','updatedAt','user_id'],
+            });
 
-        return dataTodo = filteredData
-    }
+            res.json({
+                todo
+            })
+
+        }catch(error){
+            res.json({
+                message: 'Gagal mendapatkan data',
+                error
+            })
+        }
+
+        
+    },
+    addTodo: async(req,res)=>{
+        let data = req.body
+
+        try{
+            await Todos.create(data)
+
+            res.status(201).json({
+                message: 'berhasil menambah data',
+                data
+            })
+
+        } catch {
+            res.status(400).json({
+                message: 'gagal menambah data'
+            })
+        }
+    },
+    deleteById: async(req,res)=>{
+        let TodoId = req.params.id;
+
+        try {
+            const deletedTodo = await Todos.destroy({
+                where: {
+                    id: TodoId,
+                },
+            });
+    
+            if (deletedTodo) {
+                res.status(200).json({ message: 'Data user berhasil dihapus.' });
+            } else {
+                res.status(404).json({ message: 'Data user tidak ditemukan.' });
+            }
+        } catch (error) {
+            console.error('Error saat menghapus data user:', error);
+            res.status(500).json({ message: 'Gagal menghapus data user.' });
+        }
+    },
+    deleteAllTodo: async (req, res) => {
+        try {
+            const deletedCount = await Todos.destroy({
+                where: {},
+                truncate: true, 
+            });
+
+            res.status(200).json({
+                message: `Berhasil menghapus semua data todo.`,
+            });
+        } catch (error) {
+            console.error('Error saat menghapus semua data todo:', error);
+            res.status(500).json({ message: 'Gagal menghapus semua data todo.' });
+        }
+    },
 }
 
 
