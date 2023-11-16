@@ -124,10 +124,8 @@ module.exports = {
                 });
             }
 
-            // Update data dengan ID yang diminta
             await existingTodo.update(newData);
 
-            // Ambil data yang telah diupdate
             const updatedTodo = await Todos.findByPk(TodoId);
 
             res.status(200).json({
