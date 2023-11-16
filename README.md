@@ -1,7 +1,7 @@
 
 # Dokumentasi API
 
-![App Screenshot](https://iili.io/JCbFWQa.png)
+![App Screenshot](https://iili.io/JCboBtI.png)
 
 ### Register User
 Berfungsi untuk membuat akun user.
