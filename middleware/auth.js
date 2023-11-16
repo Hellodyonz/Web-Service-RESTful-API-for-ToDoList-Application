@@ -6,7 +6,7 @@ const verifyToken = (req, res, next) => {
 
     if (!header) {
         return res.status(401).json({
-            message: 'Token not provided' // Mengubah pesan sesuai dengan status 401
+            message: 'Token not provided' 
         });
     }
 
@@ -14,7 +14,7 @@ const verifyToken = (req, res, next) => {
 
     if (!token) {
         return res.status(401).json({
-            message: 'Invalid token' // Mengubah pesan sesuai dengan status 401
+            message: 'Invalid token' 
         });
     }
 
@@ -24,45 +24,9 @@ const verifyToken = (req, res, next) => {
         next();
     } catch (error) {
         return res.status(401).json({
-            message: 'Failed to authenticate token' // Mengubah pesan sesuai dengan status 401
+            message: 'Failed to authenticate token' 
         });
     }
 }
 
 module.exports = verifyToken;
-
-
-
-
-// const jwt = require('jsonwebtoken')
-
-// const KEY = "secret"
-
-// const verifyToken=(req,res,next)=>{
-//     const header = req.headers.authorization
-
-//     if(!header){
-//         res.json({
-//             message: 'gaada kocak'
-//         })
-//         return
-//     }
-
-//     const token = header.split(" ")[1];
-
-
-//     if(!token){
-//         res.json({
-//             message: 'invalid token'
-//         })
-//         return
-//     }
-
-//     const payload = jwt.verify(token, KEY)
-
-//     req.payload = payload
-
-//     next()
-// }
-
-// module.exports = verifyToken

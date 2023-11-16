@@ -5,7 +5,7 @@ const authRoutes = require('./auth-route');
 const userRoutes = require('./user-routes')
 const verifyToken = require('../middleware/auth');
 
-route.use("/todos", todoRoutes) //,verifyToken
+route.use("/todos",verifyToken, todoRoutes)
 route.use("/auth", authRoutes)
 route.use('/users', userRoutes)
 
