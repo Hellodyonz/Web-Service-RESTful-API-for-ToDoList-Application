@@ -6,9 +6,9 @@
 ### Register User
 Berfungsi untuk membuat akun user.
 
-`
+```
   POST /auth/regis
-`
+```
 ##### Data dari password,username,email, dan adress akan tersimpan kedalam database online.
 
 ### Login User
