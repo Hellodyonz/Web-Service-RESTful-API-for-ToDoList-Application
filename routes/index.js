@@ -10,9 +10,10 @@ route.use("/auth", authRoutes)
 route.use('/users', userRoutes)
 
 route.get('/',(req,res)=>{
-    res.json(
-        {message: 'Gidion Bagas Prananta'}
-    )
+    res.json({
+        message: 'Gidion Bagas Prananta',
+        dokumentasi: 'untuk dokumentasi bisa dilihat di ---> https://github.com/Hellodyonz/Web-Service-RESTful-API-for-ToDoList-Application'
+    })
 })
  
 module.exports = route
