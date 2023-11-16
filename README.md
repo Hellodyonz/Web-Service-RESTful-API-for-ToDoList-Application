@@ -14,12 +14,12 @@ Berfungsi untuk membuat akun user.
 ### Login User
 Berfungsi untuk membuat akun user.
 
-```http
+```
   POST /auth/login
 ```
 ##### mengakses data dari database untuk login
 ##### mengambil data dari body
-```http
+```
   {
   "email": "youremail@gmail.com",
   "password": "yourpassword"
@@ -27,7 +27,7 @@ Berfungsi untuk membuat akun user.
 ```
 ### Get all data todo
 ##### Hanya bisa diakses ketika sudah login
-```http
+```
   GET /todos/
 ```
 ##### mengambil properti dari HTTP header
@@ -40,11 +40,11 @@ Berfungsi untuk membuat akun user.
 ##### Login token didapat dari token yang dikembalikan json saat login
 
 ### Menambah todo
-```http
+```
   POST /todos/addTodo
 ```
 ##### menambah todo melalui body
-```http
+```
   {
   "value" : "Makan bersama",
   "user_id" : 1
@@ -52,36 +52,36 @@ Berfungsi untuk membuat akun user.
 ```
 ### Mendapatkan todo berdasarkan Id
 ##### ganti `:id` dengan id todo yang diinginkan
-```http
+```
   GET /todos/:id
 ```
 ### Mendapatkan detail todo
 ##### ganti `:id` dengan id todo yang diinginkan
 
-```http
+```
   GET /todos/:id/detail
 ```
 ### Mendapatkan detail todo berdasarkan Id
 ##### ganti `:id` dengan id todo yang diinginkan
-```http
+```
   GET /todos/:id/detail
 ```
 ### Menngedit data todo
 ##### ganti `:id` dengan id todo yang diinginkan
-```http
+```
   PUT /todos/:id
 ```
 ##### mengedit data melalui body
-```http
+```
   "value" : "Makan bersama",
   "user_id" : 1
 ```
 ### Menghapus data berdasarkan id
 ##### ganti `:id` dengan id todo yang diinginkan
-```http
+```
   DELETE /todos/:id
 ```
 ### Menghapus semua data todo
-```http
+```
   DELETE /todos/
 ```
